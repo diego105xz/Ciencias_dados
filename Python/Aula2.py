@@ -148,3 +148,90 @@ def busca_binaria(lista, elemento):
 testelista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 print(busca_binaria(testelista, 14))
 
+
+
+#Algoritmo de Ordenação por inserção (Insertion Sort)
+#nesse algoritmo ele faze comparação entre primeiro e segundo valor do vetor, depois segundo e terceiro valor do vetor...
+def executar_insertion_sort(lista):
+	n = len(lista)
+	for i in range(1, n):
+	    valor_inserir = lista[i] 
+	    j = i - 1
+	        
+	    while j >= 0 and lista[j] > valor_inserir:
+	        lista[j + 1] = lista[j]
+	        j -= 1
+	        lista[j + 1] = valor_inserir
+	    
+	return lista
+	
+	
+lista = [10, 8, 7, 3, 2, 1]
+executar_insertion_sort(lista)
+
+#Algoritmo de ordenação por seleção (selection sort)
+#percorre vetor ou lista múltiplas vezes, procuranod o menor valor e organizando do menor para o maior.
+def executar_selection_sort(lista):
+    n = len(lista)
+    
+    for i in range(0, n-1):
+        min = i
+        for j in range(i+1, n):
+            if lista[j] < lista[min]:
+                min = j
+        lista[i], lista[min] = lista[min], lista[i]
+    return lista
+
+
+lista = [10, 8, 7, 3, 2, 1]
+executar_selection_sort(lista)
+
+
+#Algoritmo de ordenação por bolha (bubble sort)
+#percorre vetor ou lista múltiplas vezes. A cada passagem, os pares de elementos adjacentes do vetor são comparados e, depois disso, são trocados se não estiverem ordenados.
+#não é indicado para uma grande quantidade de dados.
+
+def executar_bubble_sort(lista):
+    n = len(lista)
+    for i in range(n-1):
+        for j in range(n-1):
+            if lista[j] > lista[j + 1]:
+                lista[j], lista[j + 1] = lista[j + 1], lista[j]
+    return lista
+
+lista = [10, 8, 7, 3, 2, 1]
+executar_bubble_sort(lista)
+
+
+#Algoritmo de ordenação merge sort
+#O vetor é dividido em duas metades e, em seguida, novamente é dividido novamente em outras duas partes – ao repetir a divisão do vetor, em um determinado momento teremos vários vetores com apenas um elemento.
+def executar_merge_sort(lista):
+    if len(lista) <= 1: return lista
+    else:
+        meio = len(lista) // 2
+        esquerda = executar_merge_sort(lista[:meio])
+        direita = executar_merge_sort(lista[meio:])
+        return executar_merge(esquerda, direita)
+
+    
+def executar_merge(esquerda, direita):
+    sub_lista_ordenada = []
+    topo_esquerda, topo_direita = 0, 0
+    while topo_esquerda < len(esquerda) and topo_direita < len(direita):
+        if esquerda[topo_esquerda] <= direita[topo_direita]:
+            sub_lista_ordenada.append(esquerda[topo_esquerda])
+            topo_esquerda += 1
+        else:
+            sub_lista_ordenada.append(direita[topo_direita])
+            topo_direita += 1
+    sub_lista_ordenada += esquerda[topo_esquerda:]
+    sub_lista_ordenada += direita[topo_direita:]
+    return sub_lista_ordenada
+
+
+lista = [10, 8, 7, 8, 3, 2, 1]
+executar_merge_sort(lista)
+
+
+#Algoritmo de ordenação quick sort
+#o pivô, que corresponde ao elemento do meio do vetor. Depois, nós trocamos os elementos no início do vetor com os elementos do final 
